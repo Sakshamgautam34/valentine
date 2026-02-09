@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.3">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;❤️ My Valentine ❤️&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="stylesheet" href="style.css"&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;body class="love-bg"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- 🎵 Background Music (starts after YES click) --&gt;</p>
+<p class="p1">&lt;audio id="bgMusic" autoplay loop&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;source src="until-i-found-you.mp3" type="audio/mpeg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>Your browser does not support the audio element.</p>
+<p class="p1">&lt;/audio&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;div class="love-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;💞 YAYYY!!! 💞&lt;/h1&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>Until I found you, I never knew what love truly felt like ❤️ <span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>You are my calm, my happiness, my forever 💖</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;img src="us.jpg" alt="Our Love"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h2&gt;Forever Yours 💘&lt;/h2&gt;</p>
+<p class="p1">&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- 🎉 Confetti Canvas --&gt;</p>
+<p class="p1">&lt;canvas id="confetti"&gt;&lt;/canvas&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- 🎶 Smooth Fade-in Music --&gt;</p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">const audio = document.getElementById("bgMusic");</p>
+<p class="p1">audio.volume = 0;</p>
+<p class="p2"><br></p>
+<p class="p1">const fade = setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>if (audio.volume &lt; 1) {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>audio.volume = Math.min(audio.volume + 0.02, 1);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>clearInterval(fade);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>}</p>
+<p class="p1">}, 200);</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- 🎉 Confetti Animation --&gt;</p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">const canvas = document.getElementById("confetti");</p>
+<p class="p1">const ctx = canvas.getContext("2d");</p>
+<p class="p2"><br></p>
+<p class="p1">canvas.width = window.innerWidth;</p>
+<p class="p1">canvas.height = window.innerHeight;</p>
+<p class="p2"><br></p>
+<p class="p1">const pieces = Array.from({ length: 150 }, () =&gt; ({</p>
+<p class="p1"><span class="Apple-converted-space">  </span>x: Math.random() * canvas.width,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>y: Math.random() * canvas.height,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>r: Math.random() * 6 + 4,</p>
+<p class="p1"><span class="Apple-converted-space">  </span>d: Math.random() * 20</p>
+<p class="p1">}));</p>
+<p class="p2"><br></p>
+<p class="p1">function draw() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ctx.clearRect(0, 0, canvas.width, canvas.height);</p>
+<p class="p1"><span class="Apple-converted-space">  </span>ctx.fillStyle = "pink";</p>
+<p class="p1"><span class="Apple-converted-space">  </span>pieces.forEach(p =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.beginPath();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>ctx.fill();</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1"><span class="Apple-converted-space">  </span>update();</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">function update() {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>pieces.forEach(p =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">    </span>p.y += Math.cos(p.d) + 1;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>if (p.y &gt; canvas.height) p.y = 0;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>});</p>
+<p class="p1">}</p>
+<p class="p2"><br></p>
+<p class="p1">setInterval(draw, 30);</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;!-- 🔄 Resize Fix --&gt;</p>
+<p class="p1">&lt;script&gt;</p>
+<p class="p1">window.addEventListener("resize", () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">  </span>canvas.width = window.innerWidth;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>canvas.height = window.innerHeight;</p>
+<p class="p1">});</p>
+<p class="p1">&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
