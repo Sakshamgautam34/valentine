@@ -1,0 +1,126 @@
+/* Base layout */
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Comic Sans MS', cursive;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Floating hearts layer */
+.hearts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hearts::before {
+  content: "💖 💗 💓 💘 💝";
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  animation: float 10s linear infinite;
+}
+
+/* Heart animation */
+@keyframes float {
+  from {
+    transform: translateY(100vh);
+  }
+  to {
+    transform: translateY(-100vh);
+  }
+}
+
+/* Main container */
+.container {
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+/* Headings */
+h1 {
+  font-size: 2.6rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+}
+
+/* Buttons */
+.buttons {
+  margin-top: 30px;
+}
+
+button {
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.yes {
+  background: #ff4d6d;
+  color: white;
+  box-shadow: 0 0 15px rgba(255, 77, 109, 0.7);
+}
+
+.no {
+  background: #444;
+  color: white;
+  position: absolute;
+}
+
+/* Love page background */
+.love-bg {
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+}
+
+/* Love page container */
+.love-container {
+  text-align: center;
+  color: white;
+  max-width: 600px;
+  padding: 20px;
+}
+
+/* Couple image */
+.love-container img {
+  width: 280px;
+  max-width: 90%;
+  border-radius: 20px;
+  margin-top: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 1.1rem;
+    padding: 12px 28px;
+  }
+}
