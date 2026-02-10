@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <title>❤️ My Valentine ❤️</title>
   <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body class="love-bg">
 
-<audio id="bgMusic" autoplay loop>
+<audio id="bgMusic" loop>
   <source src="until-i-found-you.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
@@ -24,21 +25,35 @@
   <img src="us.jpg" alt="Our Love">
 
   <h2>Forever Yours 💘</h2>
+  
+  <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 10px;">
+    (Tap screen for music 🎵)
+  </p>
 </div>
 
 <canvas id="confetti"></canvas>
 
 <script>
-const audio = document.getElementById("bgMusic");
-audio.volume = 0;
+  const audio = document.getElementById("bgMusic");
+  
+  // Try to play immediately (works on desktop)
+  const playPromise = audio.play();
 
-const fade = setInterval(() => {
-  if (audio.volume < 1) {
-    audio.volume = Math.min(audio.volume + 0.02, 1);
-  } else {
-    clearInterval(fade);
+  if (playPromise !== undefined) {
+    playPromise.catch(error => {
+      // If mobile blocks it, wait for the first touch
+      console.log("Autoplay blocked. Waiting for touch.");
+      document.body.addEventListener('click', unlockAudio);
+      document.body.addEventListener('touchstart', unlockAudio);
+    });
   }
-}, 200);
+
+  function unlockAudio() {
+    audio.play();
+    // Remove listener so it doesn't try to play again and again
+    document.body.removeEventListener('click', unlockAudio);
+    document.body.removeEventListener('touchstart', unlockAudio);
+  }
 </script>
 
 <script>
