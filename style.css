@@ -8,10 +8,10 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  position: relative; /* vital for absolute positioning of children */
+  position: relative;
 }
 
-/* Floating hearts layer (Home Page) */
+/* Floating hearts layer */
 .hearts {
   position: absolute;
   top: 0;
@@ -31,22 +31,17 @@ body {
   animation: float 10s linear infinite;
 }
 
-/* Heart animation */
 @keyframes float {
-  from {
-    transform: translateY(100vh);
-  }
-  to {
-    transform: translateY(-100vh);
-  }
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-100vh); }
 }
 
-/* Main container (Home Page) */
+/* Main container */
 .container {
   text-align: center;
   color: white;
-  z-index: 2;
   position: relative;
+  z-index: 2; /* Keeps text above confetti */
 }
 
 /* Headings */
@@ -62,6 +57,9 @@ h1 {
 /* Buttons */
 .buttons {
   margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Space between buttons */
 }
 
 button {
@@ -86,27 +84,23 @@ button:hover {
 .no {
   background: #444;
   color: white;
-  position: absolute;
+  /* Removed 'position: absolute' so it aligns nicely initially */
 }
 
-/* Love page background */
+/* Love page stuff */
 .love-bg {
   background: linear-gradient(135deg, #ff758c, #ff7eb3);
 }
 
-/* Love page container (The Message) */
 .love-container {
   text-align: center;
   color: white;
   max-width: 600px;
   padding: 20px;
-  
-  /* UPDATED: Keeps text on top of confetti */
   position: relative;
-  z-index: 10; 
+  z-index: 10;
 }
 
-/* Couple image */
 .love-container img {
   width: 280px;
   max-width: 90%;
@@ -115,29 +109,18 @@ button:hover {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* NEW: Confetti Canvas Positioning */
 #confetti {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1; /* Puts it behind the text */
-  pointer-events: none; /* Allows clicks to go through */
+  z-index: 1;
+  pointer-events: none;
 }
 
-/* Mobile responsiveness */
 @media (max-width: 600px) {
-  h1 {
-    font-size: 2rem;
-  }
-
-  .subtitle {
-    font-size: 1rem;
-  }
-
-  button {
-    font-size: 1.1rem;
-    padding: 12px 28px;
-  }
+  h1 { font-size: 2rem; }
+  .subtitle { font-size: 1rem; }
+  button { font-size: 1.1rem; padding: 12px 28px; }
 }
