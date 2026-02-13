@@ -27,7 +27,7 @@
 
   <h2>Forever Yours 💘</h2>
   
-  <div id="timer" style="font-size: 1.2rem; margin-top: 10px; font-weight: bold; color: #880e4f;"></div>
+  <div id="timer"></div>
 
   <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 15px;">
     (Tap screen for music 🎵)
@@ -47,7 +47,6 @@
   setInterval(() => {
     const now = new Date();
     const diff = now - startDate;
-
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
     const minutes = Math.floor((diff / 1000 / 60) % 60);
