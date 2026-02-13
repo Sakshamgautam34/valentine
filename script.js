@@ -3,19 +3,26 @@ const noBtn = document.getElementById("noBtn");
 
 if (noBtn) {
   function moveNoButton() {
+    // 1. Get Screen Size
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
+
+    // 2. Get Button Size
     const btnWidth = noBtn.offsetWidth || 100;
     const btnHeight = noBtn.offsetHeight || 50;
-    
-    // Safety margin
-    const margin = 50;
+
+    // 3. Safety Margin (Keep away from edges)
+    const margin = 30;
+
+    // 4. Calculate Limits
     const maxX = screenWidth - btnWidth - margin;
     const maxY = screenHeight - btnHeight - margin;
 
+    // 5. Generate Position
     const randomX = Math.max(margin, Math.random() * maxX);
     const randomY = Math.max(margin, Math.random() * maxY);
 
+    // 6. Apply
     noBtn.style.position = 'fixed';
     noBtn.style.left = `${randomX}px`;
     noBtn.style.top = `${randomY}px`;
