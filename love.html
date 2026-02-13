@@ -27,7 +27,7 @@
 
   <h2>Forever Yours 💘</h2>
   
-  <div id="timer" style="font-size: 1.2rem; margin-top: 10px; font-weight: bold; color: #ffe6eb;"></div>
+  <div id="timer" style="font-size: 1.2rem; margin-top: 10px; font-weight: bold; color: #880e4f;"></div>
 
   <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 15px;">
     (Tap screen for music 🎵)
@@ -42,7 +42,6 @@
 <canvas id="confetti"></canvas>
 
 <script>
-  // YOUR DATE: June 25, 2023
   const startDate = new Date("2023-06-25"); 
 
   setInterval(() => {
@@ -64,15 +63,9 @@
   const playPromise = audio.play();
   if (playPromise !== undefined) {
     playPromise.catch(error => {
-      console.log("Autoplay blocked. Waiting for touch.");
-      document.body.addEventListener('click', unlockAudio);
-      document.body.addEventListener('touchstart', unlockAudio);
+      document.body.addEventListener('click', () => audio.play(), { once: true });
+      document.body.addEventListener('touchstart', () => audio.play(), { once: true });
     });
-  }
-  function unlockAudio() {
-    audio.play();
-    document.body.removeEventListener('click', unlockAudio);
-    document.body.removeEventListener('touchstart', unlockAudio);
   }
 </script>
 
@@ -81,14 +74,12 @@ const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
 const pieces = Array.from({ length: 150 }, () => ({
   x: Math.random() * canvas.width,
   y: Math.random() * canvas.height,
   r: Math.random() * 6 + 4,
   d: Math.random() * 20
 }));
-
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "#fff0f5"; 
@@ -99,7 +90,6 @@ function draw() {
   });
   update();
 }
-
 function update() {
   pieces.forEach(p => {
     p.y += Math.cos(p.d) + 1;
