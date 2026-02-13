@@ -3,43 +3,35 @@ const noBtn = document.getElementById("noBtn");
 
 if (noBtn) {
   function moveNoButton() {
-    // 1. Get exact button size (or guess if not rendered yet)
+    // 1. Get Screen Size
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    // 2. Get Button Size (Defaults if not loaded)
     const btnWidth = noBtn.offsetWidth || 100;
     const btnHeight = noBtn.offsetHeight || 50;
 
-    // 2. Calculate Screen Bounds
-    // We stay 30px away from the edges to be safe
-    const limitX = window.innerWidth - btnWidth - 30;
-    const limitY = window.innerHeight - btnHeight - 30;
+    // 3. Define Safe Zone (Keep 20px away from edges)
+    const padding = 20;
+    const maxX = screenWidth - btnWidth - padding;
+    const maxY = screenHeight - btnHeight - padding;
 
-    // 3. Generate Random Position
-    // Math.max(30, ...) ensures we don't spawn too far left/top
-    const randomX = Math.max(30, Math.random() * limitX);
-    const randomY = Math.max(30, Math.random() * limitY);
+    // 4. Generate Random Position
+    // Math.max(padding, ...) ensures it doesn't go off the left/top
+    const randomX = Math.max(padding, Math.random() * maxX);
+    const randomY = Math.max(padding, Math.random() * maxY);
 
-    // 4. Apply Position
-    noBtn.style.position = 'fixed'; // Float above everything
+    // 5. Apply Position
+    noBtn.style.position = 'fixed'; 
     noBtn.style.left = `${randomX}px`;
     noBtn.style.top = `${randomY}px`;
-    
-    // 5. Ensure it's on top
     noBtn.style.zIndex = "9999"; 
   }
 
-  // Move on Desktop (Hover)
+  // Events
   noBtn.addEventListener("mouseover", moveNoButton);
-  
-  // Move on Mobile (Touch)
-  noBtn.addEventListener("touchstart", (e) => {
-      e.preventDefault(); 
-      moveNoButton();
-  });
-  
-  // Backup Click (if they are fast)
-  noBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      moveNoButton();
-  });
+  noBtn.addEventListener("click", (e) => { e.preventDefault(); moveNoButton(); });
+  noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveNoButton(); });
 }
 
 /* --- YES BUTTON REDIRECT --- */
@@ -48,16 +40,15 @@ function goLove() {
 }
 
 /* --- MAGIC HEART TRAIL --- */
-// Only add hearts if we are interactive
-document.addEventListener('mousemove', function(e) {
-  createHeart(e.clientX, e.clientY);
-});
-
 document.addEventListener('touchmove', function(e) {
     if(e.touches.length > 0) {
       const touch = e.touches[0];
       createHeart(touch.clientX, touch.clientY);
     }
+});
+
+document.addEventListener('mousemove', function(e) {
+  createHeart(e.clientX, e.clientY);
 });
 
 function createHeart(x, y) {
