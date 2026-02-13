@@ -21,38 +21,54 @@
     <div class="bubble"><img src="p4.jpg"></div>
     <div class="bubble"><img src="p5.jpg"></div>
     <div class="bubble"><img src="p6.jpg"></div>
+    <div class="bubble"><img src="p7.jpg"></div>
+    <div class="bubble"><img src="p8.jpg"></div>
+    <div class="bubble"><img src="p9.jpg"></div>
+    <div class="bubble"><img src="p10.jpg"></div>
+    <div class="bubble"><img src="p11.jpg"></div>
+    <div class="bubble"><img src="p12.jpg"></div>
+    <div class="bubble"><img src="p13.jpg"></div>
+    <div class="bubble"><img src="p14.jpg"></div>
+    <div class="bubble"><img src="p15.jpg"></div>
+    <div class="bubble"><img src="p16.jpg"></div>
+    
     <div class="bubble"><img src="p1.jpg"></div>
-    <div class="bubble"><img src="p3.jpg"></div>
+    <div class="bubble"><img src="p5.jpg"></div>
   </div>
 
   <div class="card-container">
-    <h1>My Valentine Week for You 🌹</h1>
+    <h1>My Forever Valentine 🌹</h1>
     
     <div class="week-list">
-      <p>🌹 <strong>Rose Day:</strong> You are the most beautiful flower in my garden.</p>
-      <p>💍 <strong>Propose Day:</strong> I’d choose you in every lifetime.</p>
-      <p>🍫 <strong>Chocolate Day:</strong> You are sweeter than any chocolate.</p>
-      <p>🧸 <strong>Teddy Day:</strong> My favorite person to cuddle.</p>
-      <p>🤝 <strong>Promise Day:</strong> I promise to always be your safe place.</p>
-      <p>🤗 <strong>Hug Day:</strong> My arms are your forever home.</p>
-      <p>💋 <strong>Kiss Day:</strong> Every kiss with you is magic.</p>
+      <p>🌹 <strong>Rose Day:</strong> Every day with you feels like spring. You make ordinary moments feel special just by being beside me.</p>
+      
+      <p>💍 <strong>Propose Day:</strong> If I had to choose again, in every lifetime, in every world — I would still choose you.</p>
+      
+      <p>🍫 <strong>Chocolate Day:</strong> Life is sweeter with you in it. Your smile is the best part of my every day.</p>
+      
+      <p>🧸 <strong>Teddy Day:</strong> You are my peace after a long day, my safe place in a chaotic world.</p>
+      
+      <p>🤝 <strong>Promise Day:</strong> I promise to keep growing with you, learning with you, and choosing you — always.</p>
+      
+      <p>🤗 <strong>Hug Day:</strong> When you hug me, it feels like the world pauses just for us.</p>
+      
+      <p>💋 <strong>Kiss Day:</strong> Every kiss still makes my heart race — and I hope it always does.</p>
+      
+      <p>❤️ <strong>Valentine’s Day:</strong> You are my partner, my strength, my calm, and my forever.</p>
     </div>
 
-    <h2 style="margin-top:20px;">I Love You Forever! ❤️</h2>
+    <h2 style="margin-top:20px;">I Love You More Than Words! ❤️</h2>
     
     <a href="index.html" class="home-btn">🏠 Home</a>
   </div>
 
   <script>
     const audio = document.getElementById("bgMusic");
-    
-    // Attempt to play immediately
     const playPromise = audio.play();
     
     if (playPromise !== undefined) {
       playPromise.catch(error => {
-        // If blocked, wait for a touch/click to start
-        console.log("Audio autoplay blocked. Waiting for interaction.");
+        // If autoplay is blocked, wait for a touch/click
         document.body.addEventListener('click', () => audio.play(), { once: true });
         document.body.addEventListener('touchstart', () => audio.play(), { once: true });
       });
