@@ -1,27 +1,40 @@
 /* --- GOOGLE FONTS IMPORT --- */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap');
 
-/* Global Reset to fix sizing issues */
+/* Global Reset */
 * {
   box-sizing: border-box;
 }
 
-/* Base layout */
+/* Base layout with ANIMATED BACKGROUND */
 body {
   margin: 0;
   height: 100vh;
-  /* Romantic Font */
   font-family: 'Dancing Script', cursive; 
   font-size: 1.5rem; 
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  
+  /* 🌈 NEW: 4-Color Animated Gradient */
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffd1ff, #fbc2eb);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* Stops scrolling of the main page */
+  overflow: hidden;
   position: relative;
 }
 
-/* --- HOME & LOVE PAGE STYLES --- */
+/* 🌈 Animation Keyframes */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- HOME PAGE STYLES --- */
+
+/* Floating hearts layer */
 .hearts {
   position: absolute;
   top: 0;
@@ -32,77 +45,148 @@ body {
   pointer-events: none;
 }
 
-.container, .love-container {
+.hearts::before {
+  content: "💖 💗 💓 💘 💝";
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  animation: float 10s linear infinite;
+  text-shadow: 0 0 10px rgba(255,255,255,0.5); /* Glowing hearts */
+}
+
+@keyframes float {
+  from { transform: translateY(100vh) rotate(0deg); }
+  to { transform: translateY(-100vh) rotate(20deg); }
+}
+
+/* ✨ NEW: "Frosted Glass" Container for Home Page */
+.container {
   text-align: center;
   color: white;
   position: relative;
   z-index: 10;
-  width: 90%; /* Fixes mobile zoom issue */
+  width: 90%;
   max-width: 600px;
+  
+  /* Glassmorphism Effect */
+  background: rgba(255, 255, 255, 0.15); /* Transparent white */
+  backdrop-filter: blur(8px); /* Blurs the background behind it */
+  -webkit-backdrop-filter: blur(8px); /* Safari support */
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
 }
 
+/* Headings */
 h1 {
   font-family: 'Pacifico', cursive;
-  font-size: 2.5rem;
+  font-size: 3rem; /* Bigger Title */
   margin-bottom: 15px;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
   line-height: 1.2;
 }
 
-.subtitle { font-size: 1.3rem; }
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
 
 /* Buttons */
 .buttons {
-  margin-top: 30px;
+  margin-top: 40px;
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
 }
 
 button {
   font-family: 'Pacifico', cursive;
-  padding: 12px 30px;
-  font-size: 1.2rem;
+  padding: 15px 40px;
+  font-size: 1.3rem;
   border: none;
-  border-radius: 40px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-button:hover { transform: scale(1.1); }
-.yes { background: #ff4d6d; color: white; box-shadow: 0 0 15px rgba(255, 77, 109, 0.7); }
-.no { background: #fff; color: #ff4d6d; }
+button:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
 
-/* Images */
+.yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+.no {
+  background: white;
+  color: #ff4d6d;
+}
+
+/* --- LOVE PAGE STYLES --- */
+.love-bg {
+  /* This page can keep the same animated background from 'body' */
+}
+
+.love-container {
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 10;
+  width: 90%;
+  max-width: 600px;
+  
+  /* Glass effect for Love Page too */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
 .love-container img {
-  width: 100%; /* Responsive width */
+  width: 100%;
   max-width: 280px;
   border-radius: 20px;
   margin-top: 20px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-  border: 4px solid rgba(255,255,255,0.5);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  border: 5px solid white;
+  transform: rotate(-2deg); /* Cute tilt */
+}
+
+#confetti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* --- MORE LOVE PAGE (Card Styles) --- */
 .card-container {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.95); /* Solid white for readability */
   padding: 25px;
   border-radius: 20px;
-  
-  /* CRITICAL FIX FOR MOBILE SCREEN SIZE */
   width: 90%; 
   max-width: 500px;
-  max-height: 90vh; /* Ensures it fits on screen vertically */
-  overflow-y: auto; /* Adds scroll inside the card if text is long */
-  
+  max-height: 90vh; 
+  overflow-y: auto; 
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 15px 50px rgba(0,0,0,0.3);
   z-index: 10;
   position: relative;
+  border: 4px solid #ffb3c1;
 }
 
 .week-list p {
-  font-size: 1.2rem; /* Readable size */
+  font-size: 1.2rem;
   margin: 15px 0;
   color: #d6336c;
   border-bottom: 1px dashed #ffb3c1;
@@ -115,16 +199,22 @@ button:hover { transform: scale(1.1); }
   display: inline-block;
   font-family: 'Pacifico', cursive;
   margin-top: 20px;
-  padding: 12px 25px;
+  padding: 12px 30px;
   background: #ff4d6d;
   color: white;
   text-decoration: none;
   border-radius: 50px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
 }
 
-/* --- BUBBLE ANIMATION (Updated for 16+ photos) --- */
+.next-btn:hover, .home-btn:hover {
+  transform: scale(1.05);
+  background: #ff3355;
+}
+
+/* --- BUBBLE ANIMATION --- */
 .bubbles-container {
   position: absolute;
   width: 100%;
@@ -137,24 +227,24 @@ button:hover { transform: scale(1.1); }
 
 .bubble {
   position: absolute;
-  bottom: -150px; /* Start below screen */
+  bottom: -150px;
   background: white;
-  padding: 5px;
+  padding: 6px;
   border-radius: 50%;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  opacity: 0.8; /* Slightly transparent */
+  opacity: 0.85;
   animation: floatUp 20s linear infinite;
 }
 
 .bubble img {
-  width: 80px; /* Smaller bubbles to fit 16 photos better */
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   object-fit: cover;
   display: block;
 }
 
-/* Random Positions & Speeds for 18 Bubbles */
+/* Random Positions & Speeds */
 .bubble:nth-child(1) { left: 5%; animation-duration: 15s; animation-delay: 0s; }
 .bubble:nth-child(2) { left: 15%; animation-duration: 22s; animation-delay: 2s; transform: scale(0.8); }
 .bubble:nth-child(3) { left: 25%; animation-duration: 18s; animation-delay: 5s; }
@@ -165,7 +255,6 @@ button:hover { transform: scale(1.1); }
 .bubble:nth-child(8) { left: 75%; animation-duration: 13s; animation-delay: 5s; }
 .bubble:nth-child(9) { left: 85%; animation-duration: 24s; animation-delay: 1s; transform: scale(1.1); }
 .bubble:nth-child(10) { left: 95%; animation-duration: 17s; animation-delay: 4s; }
-/* Extra photos positions */
 .bubble:nth-child(11) { left: 10%; animation-duration: 26s; animation-delay: 9s; transform: scale(0.7); }
 .bubble:nth-child(12) { left: 20%; animation-duration: 16s; animation-delay: 11s; }
 .bubble:nth-child(13) { left: 40%; animation-duration: 23s; animation-delay: 7s; }
@@ -181,8 +270,7 @@ button:hover { transform: scale(1.1); }
   100% { bottom: 110vh; transform: translateX(-30px) rotate(-10deg); }
 }
 
-/* Mobile Fixes */
 @media (max-width: 600px) {
-  h1 { font-size: 2rem; }
-  .bubble img { width: 60px; height: 60px; } /* Smaller bubbles on phone */
+  h1 { font-size: 2.2rem; }
+  .bubble img { width: 65px; height: 65px; }
 }
