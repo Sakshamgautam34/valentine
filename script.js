@@ -4,16 +4,21 @@ const noBtn = document.getElementById("noBtn");
 if (noBtn) {
   // Function to move the button randomly
   function moveNoButton() {
-    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+    // 1. Calculate Safe Bounds (Stay 50px away from edge)
+    const maxX = window.innerWidth - noBtn.offsetWidth - 50;
+    const maxY = window.innerHeight - noBtn.offsetHeight - 50;
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    // 2. Random coordinates
+    const x = Math.max(20, Math.random() * maxX); // Ensure it doesn't spawn too far left
+    const y = Math.max(20, Math.random() * maxY); // Ensure it doesn't spawn too far top
 
-    // Fixed position ensures it doesn't disappear off-screen
+    // 3. Apply position
     noBtn.style.position = 'fixed'; 
     noBtn.style.left = `${x}px`;
     noBtn.style.top = `${y}px`;
+    
+    // 4. IMPORTANT: Force it to stay on top of everything
+    noBtn.style.zIndex = "9999"; 
   }
 
   // Move on hover (desktop)
@@ -21,6 +26,12 @@ if (noBtn) {
   
   // Move on touch (mobile) - prevent default click
   noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      moveNoButton();
+  });
+  
+  // Extra safety: If clicked (fast fingers), move it anyway!
+  noBtn.addEventListener("click", (e) => {
       e.preventDefault();
       moveNoButton();
   });
