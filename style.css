@@ -2,24 +2,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap');
 
 /* Global Reset */
-* { box-sizing: border-box; }
-
-/* Base layout with ANIMATED BACKGROUND */
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+/* Base layout */
+body {
   height: 100vh;
+  width: 100vw;
   font-family: 'Dancing Script', cursive; 
   font-size: 1.5rem; 
   
-  /* 🌈 ANIMATED GRADIENT BACKGROUND */
+  /* Animated Background */
   background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffd1ff, #fbc2eb);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   
+  /* FORCE CENTERING */
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: hidden; /* No scrolling allowed on main page */
   position: relative;
 }
 
@@ -29,139 +35,142 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Floating hearts layer */
+/* Floating hearts background */
 .hearts {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: 0;
   pointer-events: none;
 }
 
-.hearts::before {
-  content: "💖 💗 💓 💘 💝";
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  font-size: 3rem;
-  animation: float 10s linear infinite;
-}
-
-@keyframes float {
-  from { transform: translateY(100vh) rotate(0deg); }
-  to { transform: translateY(-100vh) rotate(20deg); }
-}
-
-/* Glassmorphism Container */
+/* THE CONTAINER (Glass Box) */
 .container, .love-container {
+  /* Dimensions */
+  width: 90%;
+  max-width: 500px; /* Limits width on big screens */
+  
+  /* Centering Logic */
+  margin: auto;
   text-align: center;
-  
-  /* 🔴 UPDATED: Dark Red Text for Readability */
-  color: #880e4f; 
-  
   position: relative;
   z-index: 10;
-  width: 90%;
-  max-width: 600px;
   
-  /* ⚪️ UPDATED: Whiter background for better contrast */
+  /* Glass Look */
   background: rgba(255, 255, 255, 0.4); 
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.6);
+  padding: 30px 20px; /* Top/Bottom padding, Side padding */
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   
-  padding: 30px;
-  border-radius: 30px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  /* Text Color */
+  color: #880e4f; 
 }
 
-/* Text & Buttons */
+/* Typography */
 h1 {
   font-family: 'Pacifico', cursive;
-  font-size: 2.5rem;
+  font-size: 2.2rem; /* Slightly smaller to fit mobile */
   margin-bottom: 15px;
-  /* UPDATED: Text shadow to help it pop */
+  line-height: 1.2;
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
 }
 
-.buttons {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+p {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
 }
 
-button {
+/* Images */
+.love-container img {
+  width: 80%;
+  max-width: 250px;
+  height: auto;
+  border-radius: 15px;
+  margin: 15px auto;
+  display: block; /* Ensures image centers */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  border: 4px solid white;
+}
+
+/* Buttons Container */
+.buttons {
+  margin-top: 25px;
+  display: flex;
+  flex-wrap: wrap; /* Allows buttons to stack if screen is tiny */
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Buttons */
+button, .next-btn, .home-btn {
   font-family: 'Pacifico', cursive;
   padding: 12px 30px;
   font-size: 1.2rem;
   border: none;
-  border-radius: 40px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: transform 0.2s ease;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  text-decoration: none;
+  display: inline-block;
 }
 
-button:hover { transform: scale(1.1); }
-.yes { background: #ff4d6d; color: white; }
+button:active, .next-btn:active {
+  transform: scale(0.95);
+}
 
-/* 🔴 UPDATED: "No" button text color */
+.yes { background: #ff4d6d; color: white; }
 .no { background: white; color: #ff4d6d; border: 2px solid #ff4d6d; }
 
-/* Love Page Specifics */
-.love-container img {
-  width: 100%;
-  max-width: 280px;
-  border-radius: 20px;
+.next-btn {
+  background: #ff4d6d;
+  color: white;
   margin-top: 20px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-  border: 4px solid white;
+  font-size: 1rem;
 }
 
-/* More Love Page Card */
+/* Timer Text */
+#timer {
+  font-size: 1.1rem;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #880e4f;
+  background: rgba(255,255,255,0.5);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* More Love Page */
 .card-container {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 25px;
-  border-radius: 20px;
   width: 90%;
   max-width: 500px;
-  max-height: 90vh;
-  overflow-y: auto;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 20px;
+  margin: auto;
   position: relative;
-  /* 🔴 Dark Text here too */
+  z-index: 10;
+  max-height: 90vh; /* Prevents it from being taller than screen */
+  overflow-y: auto; /* Adds scrollbar inside if needed */
   color: #880e4f;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
 }
 
 .week-list p {
-  font-size: 1.2rem;
-  margin: 15px 0;
-  color: #d6336c;
-  border-bottom: 1px dashed #ffb3c1;
-  padding-bottom: 8px;
+  font-size: 1.1rem;
   text-align: left;
+  border-bottom: 1px dashed #ffb3c1;
+  padding: 8px 0;
+  margin: 0;
 }
 
-.next-btn, .home-btn {
-  display: inline-block;
-  font-family: 'Pacifico', cursive;
-  margin-top: 20px;
-  padding: 12px 25px;
-  background: #ff4d6d;
-  color: white;
-  text-decoration: none;
-  border-radius: 50px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-/* Bubble Animation */
-.bubbles-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
-.bubble { position: absolute; bottom: -150px; background: white; padding: 5px; border-radius: 50%; opacity: 0.8; animation: floatUp 20s linear infinite; }
-.bubble img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; display: block; }
-@keyframes floatUp { 0% { bottom: -150px; transform: translateX(0); } 100% { bottom: 110vh; transform: translateX(-30px); } }
-/* Bubble positions */
-.bubble:nth-child(1) { left: 10%; animation-duration: 15s; } .bubble:nth-child(2) { left: 20%; animation-duration: 20s; } .bubble:nth-child(3) { left: 35%; animation-duration: 12s; } .bubble:nth-child(4) { left: 50%; animation-duration: 18s; } .bubble:nth-child(5) { left: 65%; animation-duration: 14s; } .bubble:nth-child(6) { left: 80%; animation-duration: 22s; } .bubble:nth-child(7) { left: 90%; animation-duration: 16s; }
+/* Bubbles */
+.bubbles-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none; }
+.bubble { position: absolute; bottom: -100px; background: white; padding: 5px; border-radius: 50%; opacity: 0.8; animation: floatUp 15s linear infinite; }
+.bubble img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; }
+@keyframes floatUp { 100% { bottom: 110vh; transform: translateX(-20px); } }
