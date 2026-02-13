@@ -2,16 +2,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap');
 
 /* Global Reset */
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-/* Base layout - Restored to the version you liked */
+/* Base layout with ANIMATED BACKGROUND */
 body {
   margin: 0;
   height: 100vh;
   font-family: 'Dancing Script', cursive; 
-  font-size: 1.5rem; /* Kept the big, readable size */
+  font-size: 1.5rem; 
   
-  /* Animated Gradient Background */
+  /* 🌈 NEW: 4-Color Animated Gradient */
   background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffd1ff, #fbc2eb);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
@@ -23,101 +25,164 @@ body {
   position: relative;
 }
 
+/* 🌈 Animation Keyframes */
 @keyframes gradientBG {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Glassmorphism Container */
-.container, .love-container {
+/* --- HOME PAGE STYLES --- */
+
+/* Floating hearts layer */
+.hearts {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hearts::before {
+  content: "💖 💗 💓 💘 💝";
+  position: absolute;
+  width: 100%;
   text-align: center;
-  color: #880e4f; /* FIXED: Dark Red Text */
+  font-size: 3rem;
+  animation: float 10s linear infinite;
+  text-shadow: 0 0 10px rgba(255,255,255,0.5); /* Glowing hearts */
+}
+
+@keyframes float {
+  from { transform: translateY(100vh) rotate(0deg); }
+  to { transform: translateY(-100vh) rotate(20deg); }
+}
+
+/* ✨ NEW: "Frosted Glass" Container for Home Page */
+.container {
+  text-align: center;
+  color: white;
   position: relative;
   z-index: 10;
   width: 90%;
   max-width: 600px;
-  background: rgba(255, 255, 255, 0.4); 
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  padding: 30px;
+  
+  /* Glassmorphism Effect */
+  background: rgba(255, 255, 255, 0.15); /* Transparent white */
+  backdrop-filter: blur(8px); /* Blurs the background behind it */
+  -webkit-backdrop-filter: blur(8px); /* Safari support */
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 40px;
   border-radius: 30px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* Typography */
+/* Headings */
 h1 {
   font-family: 'Pacifico', cursive;
-  font-size: 2.5rem;
+  font-size: 3rem; /* Bigger Title */
   margin-bottom: 15px;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  line-height: 1.2;
 }
 
-/* Images */
+.subtitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Buttons */
+.buttons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+button {
+  font-family: 'Pacifico', cursive;
+  padding: 15px 40px;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+button:hover {
+  transform: scale(1.1) translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+.no {
+  background: white;
+  color: #ff4d6d;
+}
+
+/* --- LOVE PAGE STYLES --- */
+.love-bg {
+  /* This page can keep the same animated background from 'body' */
+}
+
+.love-container {
+  text-align: center;
+  color: white;
+  position: relative;
+  z-index: 10;
+  width: 90%;
+  max-width: 600px;
+  
+  /* Glass effect for Love Page too */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
 .love-container img {
   width: 100%;
   max-width: 280px;
   border-radius: 20px;
   margin-top: 20px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-  border: 4px solid white;
+  border: 5px solid white;
+  transform: rotate(-2deg); /* Cute tilt */
 }
 
-/* Buttons */
-.buttons {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+#confetti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
 }
 
-button, .next-btn, .home-btn {
-  font-family: 'Pacifico', cursive;
-  padding: 12px 30px;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 40px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  text-decoration: none;
-  display: inline-block;
-}
-
-button:hover { transform: scale(1.1); }
-.yes { background: #ff4d6d; color: white; }
-.no { background: white; color: #ff4d6d; border: 2px solid #ff4d6d; }
-
-.next-btn {
-  background: #ff4d6d;
-  color: white;
-  margin-top: 20px;
-  font-size: 1rem;
-}
-
-/* FIXED: Timer Text Color */
-#timer {
-  font-size: 1.2rem;
-  margin-top: 15px;
-  font-weight: bold;
-  color: #880e4f; /* Dark Red */
-}
-
-/* --- MORE LOVE PAGE (The 3rd Page) --- */
+/* --- MORE LOVE PAGE (Card Styles) --- */
 .card-container {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.95); /* Solid white for readability */
   padding: 25px;
   border-radius: 20px;
-  width: 90%;
+  width: 90%; 
   max-width: 500px;
-  max-height: 90vh; /* Prevents cropping on small screens */
-  overflow-y: auto; /* Adds scrollbar if text is too long */
+  max-height: 90vh; 
+  overflow-y: auto; 
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 15px 50px rgba(0,0,0,0.3);
   z-index: 10;
   position: relative;
-  color: #880e4f;
+  border: 4px solid #ffb3c1;
 }
 
 .week-list p {
@@ -127,45 +192,60 @@ button:hover { transform: scale(1.1); }
   border-bottom: 1px dashed #ffb3c1;
   padding-bottom: 8px;
   text-align: left;
+  line-height: 1.4;
 }
 
-/* --- RESTORED BUBBLE ANIMATION (All 18 bubbles) --- */
+.next-btn, .home-btn {
+  display: inline-block;
+  font-family: 'Pacifico', cursive;
+  margin-top: 20px;
+  padding: 12px 30px;
+  background: #ff4d6d;
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+
+.next-btn:hover, .home-btn:hover {
+  transform: scale(1.05);
+  background: #ff3355;
+}
+
+/* --- BUBBLE ANIMATION --- */
 .bubbles-container {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0; /* Behind everything */
+  top: 0;
+  left: 0;
+  z-index: 0;
   overflow: hidden;
-  pointer-events: none;
 }
 
 .bubble {
   position: absolute;
   bottom: -150px;
   background: white;
-  padding: 5px;
+  padding: 6px;
   border-radius: 50%;
-  opacity: 0.8;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  opacity: 0.85;
   animation: floatUp 20s linear infinite;
 }
 
 .bubble img {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   object-fit: cover;
   display: block;
 }
 
-@keyframes floatUp {
-  0% { bottom: -150px; transform: translateX(0); }
-  100% { bottom: 110vh; transform: translateX(-30px); }
-}
-
-/* BUBBLE POSITIONS (Restored the list you liked) */
-.bubble:nth-child(1) { left: 5%; animation-duration: 15s; }
+/* Random Positions & Speeds */
+.bubble:nth-child(1) { left: 5%; animation-duration: 15s; animation-delay: 0s; }
 .bubble:nth-child(2) { left: 15%; animation-duration: 22s; animation-delay: 2s; transform: scale(0.8); }
 .bubble:nth-child(3) { left: 25%; animation-duration: 18s; animation-delay: 5s; }
 .bubble:nth-child(4) { left: 35%; animation-duration: 25s; animation-delay: 1s; transform: scale(1.2); }
@@ -183,3 +263,14 @@ button:hover { transform: scale(1.1); }
 .bubble:nth-child(16) { left: 30%; animation-duration: 15s; animation-delay: 13s; }
 .bubble:nth-child(17) { left: 50%; animation-duration: 28s; animation-delay: 14s; }
 .bubble:nth-child(18) { left: 90%; animation-duration: 22s; animation-delay: 15s; }
+
+@keyframes floatUp {
+  0% { bottom: -150px; transform: translateX(0) rotate(0deg); }
+  50% { transform: translateX(30px) rotate(10deg); }
+  100% { bottom: 110vh; transform: translateX(-30px) rotate(-10deg); }
+}
+
+@media (max-width: 600px) {
+  h1 { font-size: 2.2rem; }
+  .bubble img { width: 65px; height: 65px; }
+}
