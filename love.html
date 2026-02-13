@@ -5,6 +5,7 @@
   <title>❤️ My Valentine ❤️</title>
   <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body class="love-bg">
@@ -41,14 +42,20 @@
 <canvas id="confetti"></canvas>
 
 <script>
-  // CHANGE THIS DATE to when you met/married! (YYYY-MM-DD)
-  const startDate = new Date("2020-01-01"); 
+  // YOUR DATE: June 25, 2023
+  const startDate = new Date("2023-06-25"); 
 
   setInterval(() => {
     const now = new Date();
     const diff = now - startDate;
+
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    document.getElementById("timer").innerText = `Loving you for: ${days} Days! ❤️`;
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / 1000 / 60) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("timer").innerText = 
+      `Loving you for: ${days} Days, ${hours} Hours, ${minutes} Minutes, ${seconds} Seconds ❤️`;
   }, 1000);
 </script>
 
@@ -84,7 +91,7 @@ const pieces = Array.from({ length: 150 }, () => ({
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#fff0f5"; // Light pink confetti
+  ctx.fillStyle = "#fff0f5"; 
   pieces.forEach(p => {
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
