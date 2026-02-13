@@ -3,42 +3,42 @@ const noBtn = document.getElementById("noBtn");
 
 if (noBtn) {
   function moveNoButton() {
-    // 1. Get Screen Dimensions
+    // 1. Get Viewport Dimensions
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
 
-    // 2. Get Button Dimensions (with defaults)
+    // 2. Get Button Dimensions
     const btnWidth = noBtn.offsetWidth || 100;
     const btnHeight = noBtn.offsetHeight || 50;
 
-    // 3. Define a LARGE Safety Margin (50px from edge)
-    const margin = 50;
+    // 3. Safety Margin (Keep it 40px away from edges)
+    const margin = 40;
 
-    // 4. Calculate Max Available Width/Height
+    // 4. Calculate Safe Zone
     const maxLeft = screenWidth - btnWidth - margin;
     const maxTop = screenHeight - btnHeight - margin;
 
-    // 5. Generate Random Coordinates (Start at 'margin', end at 'max')
+    // 5. Generate Random Position
     const randomLeft = Math.max(margin, Math.random() * maxLeft);
     const randomTop = Math.max(margin, Math.random() * maxTop);
 
-    // 6. Apply Position
-    noBtn.style.position = 'fixed'; // Removes it from the container flow
+    // 6. Apply
+    noBtn.style.position = 'fixed'; // Float above everything
     noBtn.style.left = `${randomLeft}px`;
     noBtn.style.top = `${randomTop}px`;
-    noBtn.style.zIndex = "9999"; // Ensures it floats above everything
+    noBtn.style.zIndex = "9999"; 
   }
 
-  // Desktop Hover
+  // Desktop
   noBtn.addEventListener("mouseover", moveNoButton);
   
   // Mobile Touch
   noBtn.addEventListener("touchstart", (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Stop click
     moveNoButton();
   });
   
-  // Click Backup
+  // Backup Click
   noBtn.addEventListener("click", (e) => {
     e.preventDefault();
     moveNoButton();
