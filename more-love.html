@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Love Story ❤️</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body class="love-bg">
+
+  <audio id="bgMusic" loop>
+    <source src="perfect.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="bubbles-container">
+    <div class="bubble"><img src="p1.jpg"></div>
+    <div class="bubble"><img src="p2.jpg"></div>
+    <div class="bubble"><img src="p3.jpg"></div>
+    <div class="bubble"><img src="p4.jpg"></div>
+    <div class="bubble"><img src="p5.jpg"></div>
+    <div class="bubble"><img src="p6.jpg"></div>
+    <div class="bubble"><img src="p1.jpg"></div>
+    <div class="bubble"><img src="p3.jpg"></div>
+  </div>
+
+  <div class="card-container">
+    <h1>My Valentine Week for You 🌹</h1>
+    
+    <div class="week-list">
+      <p>🌹 <strong>Rose Day:</strong> You are the most beautiful flower in my garden.</p>
+      <p>💍 <strong>Propose Day:</strong> I’d choose you in every lifetime.</p>
+      <p>🍫 <strong>Chocolate Day:</strong> You are sweeter than any chocolate.</p>
+      <p>🧸 <strong>Teddy Day:</strong> My favorite person to cuddle.</p>
+      <p>🤝 <strong>Promise Day:</strong> I promise to always be your safe place.</p>
+      <p>🤗 <strong>Hug Day:</strong> My arms are your forever home.</p>
+      <p>💋 <strong>Kiss Day:</strong> Every kiss with you is magic.</p>
+    </div>
+
+    <h2 style="margin-top:20px;">I Love You Forever! ❤️</h2>
+    
+    <a href="index.html" class="home-btn">🏠 Home</a>
+  </div>
+
+  <script>
+    const audio = document.getElementById("bgMusic");
+    
+    // Attempt to play immediately
+    const playPromise = audio.play();
+    
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        // If blocked, wait for a touch/click to start
+        console.log("Audio autoplay blocked. Waiting for interaction.");
+        document.body.addEventListener('click', () => audio.play(), { once: true });
+        document.body.addEventListener('touchstart', () => audio.play(), { once: true });
+      });
+    }
+  </script>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
