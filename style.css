@@ -6,28 +6,23 @@
 
 /* Base layout */
 body {
-  /* Allow the page to scroll naturally if needed */
   min-height: 100vh;
   width: 100vw;
   font-family: 'Dancing Script', cursive; 
   font-size: 1.2rem;
   
-  /* Animated Background */
   background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffd1ff, #fbc2eb);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   
-  /* CENTER THE CARD */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  /* Add padding so the card never touches the edges */
+  /* 🛑 UNIFIED LAYOUT ENGINE 🛑 */
+  /* We removed "display: flex" here because it caused the "thin strip" bug. */
+  /* Instead, we use standard block layout with padding. */
+  display: block; 
   padding: 20px;
-  
-  /* Important: Allow body scroll */
   overflow-x: hidden;
   overflow-y: auto;
+  text-align: center;
 }
 
 @keyframes gradientBG {
@@ -47,13 +42,17 @@ body {
   pointer-events: none;
 }
 
-/* --- THE CARD (Applies to all pages) --- */
+/* --- THE UNIVERSAL CARD --- */
+/* This styling applies to ALL pages equally now */
 .container, .love-container, .card-container {
-  /* Fixed width logic - behaves like the original code */
-  width: 100%;
-  max-width: 500px;
+  /* 🛑 EXACT POSITIONING LOGIC FROM 'MORE-LOVE' 🛑 */
+  width: 90%; 
+  max-width: 480px; /* Cap width for desktop */
   
-  /* Let height grow automatically to fit content */
+  /* Center the box using margins (Top/Bottom: 5vh, Left/Right: Auto) */
+  margin: 5vh auto; 
+  
+  /* Allow height to grow naturally with content */
   height: auto; 
   
   /* Glass Effect */
@@ -67,11 +66,9 @@ body {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   color: #880e4f;
   
-  text-align: center;
   position: relative;
   z-index: 10;
   
-  /* Ensure items are centered */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -93,12 +90,12 @@ p {
   width: 100%;
 }
 
-/* --- IMAGE STYLING --- */
+/* --- IMAGE FIX --- */
 .love-container img {
   width: auto;
   max-width: 100%;
   
-  /* Moderate height - nice and visible */
+  /* Keep image nicely sized */
   height: auto;
   max-height: 250px; 
   
