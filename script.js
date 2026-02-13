@@ -3,35 +3,47 @@ const noBtn = document.getElementById("noBtn");
 
 if (noBtn) {
   function moveNoButton() {
-    // 1. Get Screen Size
+    // 1. Get Screen Dimensions
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
 
-    // 2. Get Button Size (Defaults if not loaded)
+    // 2. Get Button Dimensions (with defaults)
     const btnWidth = noBtn.offsetWidth || 100;
     const btnHeight = noBtn.offsetHeight || 50;
 
-    // 3. Define Safe Zone (Keep 20px away from edges)
+    // 3. Calculate SAFE Boundaries
+    // We force the button to stay at least 20px inside the edges
     const padding = 20;
     const maxX = screenWidth - btnWidth - padding;
     const maxY = screenHeight - btnHeight - padding;
 
-    // 4. Generate Random Position
-    // Math.max(padding, ...) ensures it doesn't go off the left/top
+    // 4. Generate Random Coordinates within Bounds
+    // Math.max ensures we don't go negative (off-screen top/left)
+    // Math.min ensures we don't go overflow (off-screen bottom/right)
     const randomX = Math.max(padding, Math.random() * maxX);
     const randomY = Math.max(padding, Math.random() * maxY);
 
     // 5. Apply Position
-    noBtn.style.position = 'fixed'; 
+    noBtn.style.position = 'fixed';
     noBtn.style.left = `${randomX}px`;
     noBtn.style.top = `${randomY}px`;
-    noBtn.style.zIndex = "9999"; 
+    noBtn.style.zIndex = "9999"; // Force top layer
   }
 
-  // Events
+  // Desktop Hover
   noBtn.addEventListener("mouseover", moveNoButton);
-  noBtn.addEventListener("click", (e) => { e.preventDefault(); moveNoButton(); });
-  noBtn.addEventListener("touchstart", (e) => { e.preventDefault(); moveNoButton(); });
+  
+  // Mobile Touch
+  noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    moveNoButton();
+  });
+  
+  // Click (Backup)
+  noBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    moveNoButton();
+  });
 }
 
 /* --- YES BUTTON REDIRECT --- */
@@ -40,15 +52,15 @@ function goLove() {
 }
 
 /* --- MAGIC HEART TRAIL --- */
-document.addEventListener('touchmove', function(e) {
-    if(e.touches.length > 0) {
-      const touch = e.touches[0];
-      createHeart(touch.clientX, touch.clientY);
-    }
-});
-
 document.addEventListener('mousemove', function(e) {
   createHeart(e.clientX, e.clientY);
+});
+
+document.addEventListener('touchmove', function(e) {
+  if (e.touches.length > 0) {
+    const touch = e.touches[0];
+    createHeart(touch.clientX, touch.clientY);
+  }
 });
 
 function createHeart(x, y) {
