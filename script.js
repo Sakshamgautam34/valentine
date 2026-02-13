@@ -2,35 +2,48 @@
 const noBtn = document.getElementById("noBtn");
 
 if (noBtn) {
-  // Function to move the button randomly
+  // Function to move the button randomly within SAFE bounds
   function moveNoButton() {
-    // 1. Calculate Safe Bounds (Stay 50px away from edge)
-    const maxX = window.innerWidth - noBtn.offsetWidth - 50;
-    const maxY = window.innerHeight - noBtn.offsetHeight - 50;
+    // 1. Get current button size (fallback to 100x50 if not loaded yet)
+    const btnWidth = noBtn.offsetWidth || 100;
+    const btnHeight = noBtn.offsetHeight || 40;
 
-    // 2. Random coordinates
-    const x = Math.max(20, Math.random() * maxX); // Ensure it doesn't spawn too far left
-    const y = Math.max(20, Math.random() * maxY); // Ensure it doesn't spawn too far top
+    // 2. Get screen size
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
 
-    // 3. Apply position
-    noBtn.style.position = 'fixed'; 
-    noBtn.style.left = `${x}px`;
-    noBtn.style.top = `${y}px`;
+    // 3. Calculate Safe Zone (Keep 20px away from all edges)
+    // The button can go from X=20 to X=(Screen - Button - 20)
+    const minX = 20;
+    const maxX = screenWidth - btnWidth - 20;
     
-    // 4. IMPORTANT: Force it to stay on top of everything
+    const minY = 20;
+    const maxY = screenHeight - btnHeight - 20;
+
+    // 4. Generate random position within safe zone
+    // Math.max ensures we never get a negative number (off-screen left/top)
+    const randomX = Math.max(minX, Math.random() * (maxX - minX) + minX);
+    const randomY = Math.max(minY, Math.random() * (maxY - minY) + minY);
+
+    // 5. Apply the new position
+    noBtn.style.position = 'fixed'; // vital for moving freely
+    noBtn.style.left = `${randomX}px`;
+    noBtn.style.top = `${randomY}px`;
+    
+    // 6. Ensure it stays on top
     noBtn.style.zIndex = "9999"; 
   }
 
   // Move on hover (desktop)
   noBtn.addEventListener("mouseover", moveNoButton);
   
-  // Move on touch (mobile) - prevent default click
+  // Move on touch (mobile)
   noBtn.addEventListener("touchstart", (e) => {
-      e.preventDefault();
+      e.preventDefault(); // Stop the 'click' from happening
       moveNoButton();
   });
   
-  // Extra safety: If clicked (fast fingers), move it anyway!
+  // Backup: If they somehow manage to click it
   noBtn.addEventListener("click", (e) => {
       e.preventDefault();
       moveNoButton();
@@ -48,8 +61,11 @@ document.addEventListener('mousemove', function(e) {
 });
 
 document.addEventListener('touchmove', function(e) {
-  const touch = e.touches[0];
-  createHeart(touch.clientX, touch.clientY);
+  // Only create hearts for the first finger to save performance
+  if(e.touches.length > 0) {
+    const touch = e.touches[0];
+    createHeart(touch.clientX, touch.clientY);
+  }
 });
 
 function createHeart(x, y) {
