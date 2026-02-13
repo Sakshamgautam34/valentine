@@ -6,23 +6,23 @@
 
 /* Base layout */
 body {
-  /* Dynamic height to fix mobile browser bars */
+  /* Ensure full screen height */
   height: 100dvh; 
   width: 100vw;
   font-family: 'Dancing Script', cursive; 
-  font-size: 1.1rem; /* Slightly smaller text for better fit */
+  font-size: 1.1rem;
   
   /* Background */
   background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffd1ff, #fbc2eb);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   
-  /* Flexbox Centering - The safest way */
-  display: flex;
-  align-items: center;     /* Vertical Center */
-  justify-content: center; /* Horizontal Center */
+  /* 🛑 THE FIX: SWITCH TO CSS GRID 🛑 */
+  /* This creates a 1x1 grid and places the content in the dead center */
+  display: grid;
+  place-items: center;
   
-  overflow: hidden; /* Prevent background scroll */
+  overflow: hidden; /* Stop background scroll */
   position: relative;
 }
 
@@ -43,58 +43,40 @@ body {
   pointer-events: none;
 }
 
-/* --- THE SMALLER CENTERED BOX --- */
+/* --- THE CONTAINER --- */
 .container, .love-container, .card-container {
-  /* 1. Width Control */
-  width: 85%;           /* Leave space on sides */
-  max-width: 400px;     /* Never too wide on desktop */
+  /* 🛑 FORCE WIDTH: 90% of the screen width */
+  width: 90vw; 
+  max-width: 400px; /* Cap it for desktop */
   
-  /* 2. Height Control (Crucial for "Small Box") */
-  max-height: 70dvh;    /* Box never grows taller than 70% of screen */
-  height: auto;         /* Shrink if content is small */
+  /* 🛑 FORCE HEIGHT: Never taller than 80% of screen */
+  max-height: 80dvh; 
+  height: auto;
   
-  /* 3. Scrolling */
-  overflow-y: auto;     /* Scroll if content is too big */
+  /* Scroll if content is big */
+  overflow-y: auto; 
   
-  /* 4. Alignment */
-  margin: auto;         /* Magic flexbox centering */
+  /* Reset Margins (Grid handles centering now) */
+  margin: 0; 
+  
   text-align: center;
   position: relative;
   z-index: 10;
   
-  /* 5. Glass Style */
-  background: rgba(255, 255, 255, 0.6); 
+  /* Glass Style */
+  background: rgba(255, 255, 255, 0.65); 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 2px solid rgba(255, 255, 255, 0.8);
   
   padding: 20px; 
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 25px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
   color: #880e4f;
   
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-/* --- CUSTOM SCROLLBAR (Makes it look nice) --- */
-/* Works on Chrome, Edge, Safari */
-.container::-webkit-scrollbar, 
-.love-container::-webkit-scrollbar, 
-.card-container::-webkit-scrollbar {
-  width: 6px;
-}
-.container::-webkit-scrollbar-track, 
-.love-container::-webkit-scrollbar-track, 
-.card-container::-webkit-scrollbar-track {
-  background: transparent; 
-}
-.container::-webkit-scrollbar-thumb, 
-.love-container::-webkit-scrollbar-thumb, 
-.card-container::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 77, 109, 0.5); 
-  border-radius: 10px;
 }
 
 /* Typography */
@@ -114,14 +96,18 @@ p {
   width: 100%;
 }
 
-/* Images - Keeps them contained */
+/* Images */
 .love-container img {
   width: auto;
   max-width: 100%;
-  height: 160px; /* Fixed small height to save space */
+  
+  /* Keep image small enough to fit */
+  height: auto;
+  max-height: 180px; 
+  
   object-fit: cover;
   border-radius: 12px;
-  margin: 8px auto;
+  margin: 10px auto;
   display: block;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   border: 3px solid white;
@@ -151,7 +137,7 @@ button, .next-btn, .home-btn {
   display: inline-block;
   background: #ff4d6d;
   color: white;
-  white-space: nowrap; /* Prevents text breaking */
+  white-space: nowrap; 
 }
 
 button:hover { transform: scale(1.05); }
@@ -165,7 +151,7 @@ button:hover { transform: scale(1.05); }
 .next-btn {
   margin-top: 12px;
   font-size: 0.9rem;
-  white-space: normal; /* Allow long text to wrap */
+  white-space: normal;
 }
 
 /* Timer */
@@ -175,7 +161,7 @@ button:hover { transform: scale(1.05); }
   font-weight: bold;
   color: #880e4f;
   background: rgba(255,255,255,0.6);
-  padding: 6px 12px;
+  padding: 8px 12px;
   border-radius: 12px;
   flex-shrink: 0;
 }
