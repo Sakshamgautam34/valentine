@@ -11,23 +11,22 @@ if (noBtn) {
     const btnWidth = noBtn.offsetWidth || 100;
     const btnHeight = noBtn.offsetHeight || 50;
 
-    // 3. Calculate SAFE Boundaries
-    // We force the button to stay at least 20px inside the edges
-    const padding = 20;
-    const maxX = screenWidth - btnWidth - padding;
-    const maxY = screenHeight - btnHeight - padding;
+    // 3. Define a LARGE Safety Margin (50px from edge)
+    const margin = 50;
 
-    // 4. Generate Random Coordinates within Bounds
-    // Math.max ensures we don't go negative (off-screen top/left)
-    // Math.min ensures we don't go overflow (off-screen bottom/right)
-    const randomX = Math.max(padding, Math.random() * maxX);
-    const randomY = Math.max(padding, Math.random() * maxY);
+    // 4. Calculate Max Available Width/Height
+    const maxLeft = screenWidth - btnWidth - margin;
+    const maxTop = screenHeight - btnHeight - margin;
 
-    // 5. Apply Position
-    noBtn.style.position = 'fixed';
-    noBtn.style.left = `${randomX}px`;
-    noBtn.style.top = `${randomY}px`;
-    noBtn.style.zIndex = "9999"; // Force top layer
+    // 5. Generate Random Coordinates (Start at 'margin', end at 'max')
+    const randomLeft = Math.max(margin, Math.random() * maxLeft);
+    const randomTop = Math.max(margin, Math.random() * maxTop);
+
+    // 6. Apply Position
+    noBtn.style.position = 'fixed'; // Removes it from the container flow
+    noBtn.style.left = `${randomLeft}px`;
+    noBtn.style.top = `${randomTop}px`;
+    noBtn.style.zIndex = "9999"; // Ensures it floats above everything
   }
 
   // Desktop Hover
@@ -39,7 +38,7 @@ if (noBtn) {
     moveNoButton();
   });
   
-  // Click (Backup)
+  // Click Backup
   noBtn.addEventListener("click", (e) => {
     e.preventDefault();
     moveNoButton();
@@ -52,15 +51,9 @@ function goLove() {
 }
 
 /* --- MAGIC HEART TRAIL --- */
-document.addEventListener('mousemove', function(e) {
-  createHeart(e.clientX, e.clientY);
-});
-
-document.addEventListener('touchmove', function(e) {
-  if (e.touches.length > 0) {
-    const touch = e.touches[0];
-    createHeart(touch.clientX, touch.clientY);
-  }
+document.addEventListener('mousemove', (e) => createHeart(e.clientX, e.clientY));
+document.addEventListener('touchmove', (e) => {
+  if (e.touches.length > 0) createHeart(e.touches[0].clientX, e.touches[0].clientY);
 });
 
 function createHeart(x, y) {
