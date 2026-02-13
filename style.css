@@ -6,21 +6,22 @@
 
 /* Base layout */
 body {
-  height: 100vh;
+  height: 100vh; /* Force full screen height */
   width: 100vw;
   font-family: 'Dancing Script', cursive; 
-  font-size: 1.5rem; 
+  font-size: 1.2rem; /* Balanced base size */
   
   /* Animated Background */
   background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffd1ff, #fbc2eb);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   
+  /* Centering Logic */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden; 
+  overflow: hidden; /* Prevent body scroll, scroll inside cards instead */
   position: relative;
 }
 
@@ -41,71 +42,77 @@ body {
   pointer-events: none;
 }
 
-/* THE CONTAINER (Glass Box) */
-.container, .love-container {
+/* --- THE GLASS CARD CONTAINER --- */
+/* This applies to ALL pages to ensure consistent sizing */
+.container, .love-container, .card-container {
   width: 90%;
-  max-width: 500px; 
+  max-width: 500px; /* Looks good on desktop */
+  
+  /* THE MAGIC FIX FOR MOBILE CROPPING: */
+  max-height: 90vh; /* Never taller than 90% of screen */
+  overflow-y: auto; /* Scroll INSIDE the box if content is too tall */
+  
   margin: auto;
   text-align: center;
   position: relative;
   z-index: 10;
   
-  /* Glass Look */
-  background: rgba(255, 255, 255, 0.4); 
+  background: rgba(255, 255, 255, 0.5); 
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.6);
   
-  /* Spacing Fixes */
   padding: 20px; 
   border-radius: 25px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  
-  /* Text Color - Dark Red for readability */
   color: #880e4f; 
   
-  /* Center Content Vertically */
+  /* Flex Layout */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 /* Typography */
 h1 {
   font-family: 'Pacifico', cursive;
-  font-size: 2.2rem;
+  font-size: 2rem;
   margin-bottom: 10px;
   line-height: 1.2;
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+  flex-shrink: 0;
 }
 
-/* Text spacing */
 p {
-  font-size: 1.2rem;
-  margin-bottom: 15px;
-  line-height: 1.3;
-  max-width: 90%; /* Prevents text from hitting edges */
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  line-height: 1.4;
+  max-width: 100%;
 }
 
-/* FIXED: Image Sizing */
+/* --- IMAGE SCALING FIX --- */
 .love-container img {
-  width: auto; /* Let width adjust automatically */
-  max-width: 80%; /* Don't let it be wider than 80% of box */
-  max-height: 250px; /* LIMIT HEIGHT so it doesn't stretch the page */
+  width: auto;
+  max-width: 100%;
+  
+  /* This prevents the image from pushing text off-screen */
+  height: auto;
+  max-height: 30vh; /* Image takes max 30% of screen height */
+  
   border-radius: 15px;
   margin: 10px auto;
   display: block;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   border: 4px solid white;
 }
 
 /* Buttons */
 .buttons {
-  margin-top: 20px;
+  margin-top: 15px;
   display: flex;
   justify-content: center;
   gap: 15px;
+  flex-shrink: 0;
 }
 
 button, .next-btn, .home-btn {
@@ -119,6 +126,7 @@ button, .next-btn, .home-btn {
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   text-decoration: none;
   display: inline-block;
+  flex-shrink: 0;
 }
 
 button:hover { transform: scale(1.05); }
@@ -133,48 +141,35 @@ button:hover { transform: scale(1.05); }
   font-size: 1rem;
 }
 
-/* Timer Text */
+/* Timer */
 #timer {
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin-top: 10px;
   font-weight: bold;
   color: #880e4f;
   background: rgba(255,255,255,0.5);
   padding: 8px 15px;
   border-radius: 15px;
-  display: inline-block;
+  flex-shrink: 0;
 }
 
-/* More Love Page Card */
-.card-container {
-  width: 90%;
-  max-width: 500px;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 25px;
-  border-radius: 20px;
-  margin: auto;
-  position: relative;
-  z-index: 10;
-  max-height: 90vh;
-  overflow-y: auto;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  color: #880e4f;
+/* More Love Page Specifics */
+.week-list {
+  width: 100%;
+  text-align: left;
 }
 
 .week-list p {
-  font-size: 1.2rem;
-  text-align: left;
+  font-size: 1.1rem;
   border-bottom: 1px dashed #ffb3c1;
   padding: 8px 0;
   margin: 0;
-  max-width: 100%;
 }
 
-/* Restored Bubbles */
+/* Bubbles */
 .bubbles-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none; }
 .bubble { position: absolute; bottom: -150px; background: white; padding: 5px; border-radius: 50%; opacity: 0.8; animation: floatUp 20s linear infinite; }
-.bubble img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; display: block; }
+.bubble img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; }
 
 @keyframes floatUp { 0% { bottom: -150px; transform: translateX(0); } 100% { bottom: 110vh; transform: translateX(-30px); } }
 
@@ -197,3 +192,10 @@ button:hover { transform: scale(1.05); }
 .bubble:nth-child(16) { left: 30%; animation-duration: 15s; animation-delay: 13s; }
 .bubble:nth-child(17) { left: 50%; animation-duration: 28s; animation-delay: 14s; }
 .bubble:nth-child(18) { left: 90%; animation-duration: 22s; animation-delay: 15s; }
+
+/* 📱 MOBILE MEDIA QUERY: Adjusts font size slightly for small screens */
+@media (max-width: 600px) {
+  h1 { font-size: 1.8rem; }
+  p { font-size: 1rem; }
+  .container, .love-container { padding: 15px; }
+}
