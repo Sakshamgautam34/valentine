@@ -2,30 +2,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap');
 
 /* Global Reset */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; }
 
-/* Base layout */
+/* Base layout - Restored to the version you liked */
 body {
+  margin: 0;
   height: 100vh;
-  width: 100vw;
   font-family: 'Dancing Script', cursive; 
+  font-size: 1.5rem; /* Kept the big, readable size */
   
-  /* 🔽 REDUCED: Base size is smaller for Desktop (was 1.5rem) */
-  font-size: 1.2rem; 
-  
+  /* Animated Gradient Background */
   background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffd1ff, #fbc2eb);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
   
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden; 
+  overflow: hidden;
   position: relative;
 }
 
@@ -35,63 +29,44 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-.hearts {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* THE CONTAINER (Glass Box) */
+/* Glassmorphism Container */
 .container, .love-container {
-  width: 90%;
-  max-width: 450px; /* 🔽 Reduced width for desktop elegance */
-  margin: auto;
   text-align: center;
+  color: #880e4f; /* FIXED: Dark Red Text */
   position: relative;
   z-index: 10;
+  width: 90%;
+  max-width: 600px;
   background: rgba(255, 255, 255, 0.4); 
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.6);
-  padding: 25px; /* 🔽 Reduced padding */
-  border-radius: 25px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  color: #880e4f; 
+  padding: 30px;
+  border-radius: 30px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
 /* Typography */
 h1 {
   font-family: 'Pacifico', cursive;
-  font-size: 2rem; /* 🔽 Smaller title */
-  margin-bottom: 10px;
-  line-height: 1.2;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
   text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
-}
-
-p {
-  font-size: 1.1rem; /* 🔽 Smaller text */
-  margin-bottom: 10px;
 }
 
 /* Images */
 .love-container img {
-  width: 70%; /* 🔽 Smaller image */
-  max-width: 220px;
-  height: auto;
-  border-radius: 15px;
-  margin: 10px auto;
-  display: block; 
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 280px;
+  border-radius: 20px;
+  margin-top: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
   border: 4px solid white;
 }
 
 /* Buttons */
 .buttons {
-  margin-top: 20px;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
   gap: 15px;
@@ -99,75 +74,112 @@ p {
 
 button, .next-btn, .home-btn {
   font-family: 'Pacifico', cursive;
-  padding: 10px 25px;
-  font-size: 1.1rem;
+  padding: 12px 30px;
+  font-size: 1.2rem;
   border: none;
-  border-radius: 50px;
+  border-radius: 40px;
   cursor: pointer;
-  transition: transform 0.2s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   text-decoration: none;
   display: inline-block;
 }
 
-button:hover { transform: scale(1.05); }
-
+button:hover { transform: scale(1.1); }
 .yes { background: #ff4d6d; color: white; }
-/* Ensure NO button is visible initially */
-.no { background: white; color: #ff4d6d; border: 2px solid #ff4d6d; position: relative; }
+.no { background: white; color: #ff4d6d; border: 2px solid #ff4d6d; }
 
 .next-btn {
   background: #ff4d6d;
   color: white;
-  margin-top: 15px;
+  margin-top: 20px;
   font-size: 1rem;
 }
 
+/* FIXED: Timer Text Color */
 #timer {
-  font-size: 1rem;
-  margin-top: 10px;
+  font-size: 1.2rem;
+  margin-top: 15px;
   font-weight: bold;
-  color: #880e4f;
-  background: rgba(255,255,255,0.5);
-  padding: 8px;
-  border-radius: 10px;
+  color: #880e4f; /* Dark Red */
 }
 
-/* More Love Page */
+/* --- MORE LOVE PAGE (The 3rd Page) --- */
 .card-container {
-  width: 90%;
-  max-width: 480px;
   background: rgba(255, 255, 255, 0.95);
-  padding: 20px;
+  padding: 25px;
   border-radius: 20px;
-  margin: auto;
-  position: relative;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh; /* Prevents cropping on small screens */
+  overflow-y: auto; /* Adds scrollbar if text is too long */
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   z-index: 10;
-  max-height: 85vh; /* 🔽 Ensures it fits on screen */
-  overflow-y: auto; 
+  position: relative;
   color: #880e4f;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
 }
 
 .week-list p {
-  font-size: 1rem; /* 🔽 Smaller list text */
-  text-align: left;
+  font-size: 1.2rem;
+  margin: 15px 0;
+  color: #d6336c;
   border-bottom: 1px dashed #ffb3c1;
-  padding: 6px 0;
-  margin: 0;
+  padding-bottom: 8px;
+  text-align: left;
 }
 
-/* Bubbles */
-.bubbles-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none; }
-.bubble { position: absolute; bottom: -100px; background: white; padding: 5px; border-radius: 50%; opacity: 0.8; animation: floatUp 15s linear infinite; }
-.bubble img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; }
-@keyframes floatUp { 100% { bottom: 110vh; transform: translateX(-20px); } }
-
-/* 📱 MOBILE SPECIFIC RULES (Keep it big on phones) */
-@media (max-width: 600px) {
-  body { font-size: 1.4rem; } /* Bigger text on phones */
-  h1 { font-size: 2.2rem; }
-  .container, .love-container { width: 85%; padding: 20px; }
-  .love-container img { width: 90%; }
-  button { padding: 12px 30px; font-size: 1.3rem; }
+/* --- RESTORED BUBBLE ANIMATION (All 18 bubbles) --- */
+.bubbles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Behind everything */
+  overflow: hidden;
+  pointer-events: none;
 }
+
+.bubble {
+  position: absolute;
+  bottom: -150px;
+  background: white;
+  padding: 5px;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: floatUp 20s linear infinite;
+}
+
+.bubble img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+@keyframes floatUp {
+  0% { bottom: -150px; transform: translateX(0); }
+  100% { bottom: 110vh; transform: translateX(-30px); }
+}
+
+/* BUBBLE POSITIONS (Restored the list you liked) */
+.bubble:nth-child(1) { left: 5%; animation-duration: 15s; }
+.bubble:nth-child(2) { left: 15%; animation-duration: 22s; animation-delay: 2s; transform: scale(0.8); }
+.bubble:nth-child(3) { left: 25%; animation-duration: 18s; animation-delay: 5s; }
+.bubble:nth-child(4) { left: 35%; animation-duration: 25s; animation-delay: 1s; transform: scale(1.2); }
+.bubble:nth-child(5) { left: 45%; animation-duration: 14s; animation-delay: 6s; }
+.bubble:nth-child(6) { left: 55%; animation-duration: 19s; animation-delay: 3s; transform: scale(0.9); }
+.bubble:nth-child(7) { left: 65%; animation-duration: 21s; animation-delay: 8s; }
+.bubble:nth-child(8) { left: 75%; animation-duration: 13s; animation-delay: 5s; }
+.bubble:nth-child(9) { left: 85%; animation-duration: 24s; animation-delay: 1s; transform: scale(1.1); }
+.bubble:nth-child(10) { left: 95%; animation-duration: 17s; animation-delay: 4s; }
+.bubble:nth-child(11) { left: 10%; animation-duration: 26s; animation-delay: 9s; transform: scale(0.7); }
+.bubble:nth-child(12) { left: 20%; animation-duration: 16s; animation-delay: 11s; }
+.bubble:nth-child(13) { left: 40%; animation-duration: 23s; animation-delay: 7s; }
+.bubble:nth-child(14) { left: 60%; animation-duration: 18s; animation-delay: 10s; transform: scale(1.1); }
+.bubble:nth-child(15) { left: 80%; animation-duration: 20s; animation-delay: 12s; }
+.bubble:nth-child(16) { left: 30%; animation-duration: 15s; animation-delay: 13s; }
+.bubble:nth-child(17) { left: 50%; animation-duration: 28s; animation-delay: 14s; }
+.bubble:nth-child(18) { left: 90%; animation-duration: 22s; animation-delay: 15s; }
