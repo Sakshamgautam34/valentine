@@ -26,31 +26,44 @@
 
   <h2>Forever Yours 💘</h2>
   
-  <p style="font-size: 0.8rem; opacity: 0.6; margin-top: 10px;">
+  <div id="timer" style="font-size: 1.2rem; margin-top: 10px; font-weight: bold; color: #ffe6eb;"></div>
+
+  <p style="font-size: 0.8rem; opacity: 0.8; margin-top: 15px;">
     (Tap screen for music 🎵)
   </p>
+
+  <br>
+  <a href="more-love.html" class="next-btn">
+    Want to see how much your husband loves you? Click me! 💘
+  </a>
 </div>
 
 <canvas id="confetti"></canvas>
 
 <script>
-  const audio = document.getElementById("bgMusic");
-  
-  // Try to play immediately (works on desktop)
-  const playPromise = audio.play();
+  // CHANGE THIS DATE to when you met/married! (YYYY-MM-DD)
+  const startDate = new Date("2020-01-01"); 
 
+  setInterval(() => {
+    const now = new Date();
+    const diff = now - startDate;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    document.getElementById("timer").innerText = `Loving you for: ${days} Days! ❤️`;
+  }, 1000);
+</script>
+
+<script>
+  const audio = document.getElementById("bgMusic");
+  const playPromise = audio.play();
   if (playPromise !== undefined) {
     playPromise.catch(error => {
-      // If mobile blocks it, wait for the first touch
       console.log("Autoplay blocked. Waiting for touch.");
       document.body.addEventListener('click', unlockAudio);
       document.body.addEventListener('touchstart', unlockAudio);
     });
   }
-
   function unlockAudio() {
     audio.play();
-    // Remove listener so it doesn't try to play again and again
     document.body.removeEventListener('click', unlockAudio);
     document.body.removeEventListener('touchstart', unlockAudio);
   }
@@ -59,7 +72,6 @@
 <script>
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
-
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -72,7 +84,7 @@ const pieces = Array.from({ length: 150 }, () => ({
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "pink";
+  ctx.fillStyle = "#fff0f5"; // Light pink confetti
   pieces.forEach(p => {
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
@@ -87,16 +99,14 @@ function update() {
     if (p.y > canvas.height) p.y = 0;
   });
 }
-
 setInterval(draw, 30);
-</script>
-
-<script>
 window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
 </script>
+
+<script src="script.js"></script>
 
 </body>
 </html>
